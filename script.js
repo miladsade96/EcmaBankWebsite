@@ -227,3 +227,25 @@ const slider = function () {
   });
 };
 slider();
+
+////////////////////////////////////////////////////////////////////////////////////
+// DOMContentLoaded:
+
+// No need to do this because script tag is located at the end of the html document.
+document.addEventListener("DOMContentLoaded", function (e) {
+  console.log("HTML parsed and DOM is built!", e);
+});
+
+
+// Load event: html, css and js are loaded:
+window.addEventListener("load", function (e) {
+  console.log("Page fully loaded", e);
+});
+
+
+// Before Unload Event:
+// window.addEventListener("beforeunload", function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = "";
+// });
