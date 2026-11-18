@@ -1,14 +1,45 @@
-'use strict';
+"use strict";
 
-///////////////////////////////////////
-// Modal window
+const nav = document.querySelector(".nav");
+const menuButton = document.querySelector(".nav__toggle");
+const navigation = document.querySelector(".nav__links");
+const mobileLayout = window.matchMedia("(max-width: 50em)");
+
+function closeMenu(restoreFocus = false) {
+  nav.classList.remove("nav--open");
+  menuButton.setAttribute("aria-expanded", "false");
+  menuButton.setAttribute("aria-label", "Open navigation");
+  if (restoreFocus && mobileLayout.matches) menuButton.focus();
+}
+
+menuButton.addEventListener("click", () => {
+  const open = menuButton.getAttribute("aria-expanded") !== "true";
+  nav.classList.toggle("nav--open", open);
+  menuButton.setAttribute("aria-expanded", String(open));
+  menuButton.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+});
+navigation.addEventListener("click", (event) => {
+  if (event.target.closest("a")) closeMenu();
+});
+document.addEventListener("click", (event) => {
+  if (!nav.contains(event.target)) closeMenu();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && nav.classList.contains("nav--open")) {
+    closeMenu(true);
+  }
+});
+mobileLayout.addEventListener("change", () => {
+  const focusInLinks = navigation.contains(document.activeElement);
+  const focusOnButton = document.activeElement === menuButton;
+  closeMenu(focusInLinks);
+  if (!mobileLayout.matches && focusOnButton) navigation.querySelector("a").focus();
+});
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const btnScrollTo = document.querySelector(".btn--scroll-to");
-const section1 = document.querySelector("#section--1");
 
 const openModal = function (e) {
   e.preventDefault();
@@ -32,22 +63,6 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-// Smooth scroll to section 1
-btnScrollTo.addEventListener("click", () => {
-  section1.scrollIntoView({behavior: "smooth"});
-});
-
-// Page navigation smooth scroll using event delegation:
-document.querySelector(".nav__links").addEventListener(
-  "click", function (e) {
-    e.preventDefault();
-    if (e.target.classList.contains("nav__link")) {
-      const id = e.target.getAttribute("href");
-      document.querySelector(id).scrollIntoView({behavior:"smooth"});
-    }
-  }
-);
-
 // Tabbed component:
 const tabs = document.querySelectorAll(".operations__tab");
 const tabsContainer = document.querySelector(".operations__tab-container");
@@ -62,46 +77,6 @@ tabsContainer.addEventListener("click", e => {
   document.querySelector(`.operations__content--${clicked.dataset.tab}`)
     .classList.add("operations__content--active");
 })
-
-// Menu fade animation:
-const nav = document.querySelector(".nav");
-
-const handleHover = function (e) {
-  if (e.target.classList.contains("nav__link")) {
-    const link = e.target;
-    const siblings = link.closest(".nav").querySelectorAll(".nav__link");
-    const logo = link.closest(".nav").querySelector("img");
-    siblings.forEach(el => {
-      if (el !== link) el.style.opacity = this;
-      // this will be bind method parameter in here(opacity)
-    })
-    logo.style.opacity = this;
-  }
-}
-
-nav.addEventListener("mouseover", handleHover.bind("0.5"));
-nav.addEventListener("mouseout", handleHover.bind("1"));
-
-
-// Sticky navigation:
-const stickyNav = function (entries) {
-  const [entry] = entries;
-  if (entry.isIntersecting === false) {
-    nav.classList.add("sticky");
-  } else {
-    nav.classList.remove("sticky");
-  }
-}
-
-const header = document.querySelector(".header");
-const navHeight = nav.getBoundingClientRect().height;
-const headerObserver = new IntersectionObserver(stickyNav, {
-  root: null,
-  threshold: 0,
-  rootMargin: `-${navHeight}px`
-});
-headerObserver.observe(header);
-
 
 // Reveal section:
 const allSections = document.querySelectorAll(".section");

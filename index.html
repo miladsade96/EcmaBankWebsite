@@ -14,16 +14,19 @@
     <title>EcmaBank | When Banking meets Minimalist</title>
     <script defer src="script.js"></script>
   </head>
-  <body>
-    <header class="header">
-      <nav class="nav">
-        <img
-          src="img/logo.png"
-          alt="Bankist logo"
-          class="nav__logo"
-          id="logo"
-        />
-        <ul class="nav__links">
+  <body id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="nav-shell">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav__brand" href="#top" aria-label="EcmaBank home">
+          <img src="img/icon.png" alt="" class="nav__logo" width="40" height="40" />
+          <span>EcmaBank</span>
+        </a>
+        <button class="nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation">
+          <svg class="nav__menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+          <svg class="nav__close-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+        </button>
+        <ul class="nav__links" id="main-navigation">
           <li class="nav__item">
             <a class="nav__link" href="#section--1">Features</a>
           </li>
@@ -34,24 +37,24 @@
             <a class="nav__link" href="#section--3">Testimonials</a>
           </li>
           <li class="nav__item">
-            <a class="nav__link nav__link--btn btn--show-modal" href="#"
-              >Open account</a
-            >
+            <button class="nav__link nav__link--btn btn--show-modal" type="button">Open account</button>
           </li>
         </ul>
       </nav>
-
+    </div>
+    <main id="main-content" tabindex="-1">
+    <header class="header">
       <div class="header__title">
         <h1>
           When
           <!-- Green highlight effect -->
           <span class="highlight">banking</span>
           meets<br />
-          <span class="highlight">minimalist</span>
+          <span class="highlight">minimalism</span>
         </h1>
-        <h4>A simpler banking experience for a simpler life.</h4>
-        <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button>
-        <img
+        <p class="header__subtitle">A simpler banking experience for a simpler life.</p>
+        <a class="btn--text" href="#section--1">Learn more</a>
+        <img width="900" height="722"
           src="img/hero.png"
           class="header__img"
           alt="Minimalist bank items"
@@ -290,6 +293,8 @@
       </div>
       <button class="btn btn--show-modal">Open your free account today!</button>
     </section>
+
+    </main>
 
     <footer class="footer">
       <ul class="footer__nav">
