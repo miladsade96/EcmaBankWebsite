@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Explore EcmaBank’s minimalist banking interface: digital features, everyday operations and a demo account form." />
     <link rel="shortcut icon" type="image/png" href="img/icon.png" />
 
     <link
       href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
-    <title>EcmaBank | When Banking meets Minimalist</title>
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css?v=d530e21383" />
+    <title>EcmaBank | Banking meets minimalism</title>
+    <script defer src="script.js?v=d34f0f8451"></script>
   </head>
   <body id="top">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -64,70 +64,61 @@
 
     <section class="section" id="section--1">
       <div class="section__title">
-        <h2 class="section__description">Features</h2>
-        <h3 class="section__header">
+        <p class="section__description">Features</p>
+        <h2 class="section__header">
           Everything you need in a modern bank and more.
-        </h3>
+        </h2>
       </div>
 
       <div class="features">
-        <img
-          src="img/digital-lazy.jpg"
-          data-src="img/digital.jpg"
+        <img width="2000" height="1200"
+          src="img/digital.jpg" loading="lazy" decoding="async"
           alt="Computer"
-          class="features__img lazy-img"
+          class="features__img"
         />
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-monitor"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-monitor"></use>
             </svg>
           </div>
-          <h5 class="features__header">100% digital bank</h5>
+          <h3 class="features__header">100% digital bank</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde alias
-            sint quos? Accusantium a fugiat porro reiciendis saepe quibusdam
-            debitis ducimus.
+            Keep everyday banking in one place. Review balances, check recent activity and find useful tools through a clear, uncluttered interface.
           </p>
         </div>
 
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-trending-up"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-trending-up"></use>
             </svg>
           </div>
-          <h5 class="features__header">Watch your money grow</h5>
+          <h3 class="features__header">Watch your money grow</h3>
           <p>
-            Nesciunt quos autem dolorum voluptates cum dolores dicta fuga
-            inventore ab? Nulla incidunt eius numquam sequi iste pariatur
-            quibusdam!
+            Follow your savings goals with a clear overview of your progress. A simple layout keeps useful information easy to find.
           </p>
         </div>
-        <img
-          src="img/grow-lazy.jpg"
-          data-src="img/grow.jpg"
+        <img width="2000" height="1200"
+          src="img/grow.jpg" loading="lazy" decoding="async"
           alt="Plant"
-          class="features__img lazy-img"
+          class="features__img"
         />
 
-        <img
-          src="img/card-lazy.jpg"
-          data-src="img/card.jpg"
+        <img width="1999" height="1200"
+          src="img/card.jpg" loading="lazy" decoding="async"
           alt="Credit card"
-          class="features__img lazy-img"
+          class="features__img"
         />
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-credit-card"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-credit-card"></use>
             </svg>
           </div>
-          <h5 class="features__header">Free debit card included</h5>
+          <h3 class="features__header">Free debit card included</h3>
           <p>
-            Quasi, fugit in cumque cupiditate reprehenderit debitis animi enim
-            eveniet consequatur odit quam quos possimus assumenda dicta fuga
-            inventore ab.
+            Keep card controls close at hand. Review purchases and find everyday card tools from the same straightforward interface.
           </p>
         </div>
       </div>
@@ -262,50 +253,36 @@
       </div>
     </section>
 
-    <section class="section section--sign-up">
+    <section class="section section--sign-up" id="sign-up">
       <div class="section__title">
-        <h3 class="section__header">
-          The best day to join Bankist was one year ago. The second best is
+        <h2 class="section__header">
+          The best day to join EcmaBank was one year ago. The second best is
           today!
-        </h3>
+        </h2>
       </div>
-      <button class="btn btn--show-modal">Open your free account today!</button>
+      <button class="btn btn--show-modal" type="button">Open your free account today!</button>
     </section>
 
     </main>
 
     <footer class="footer">
-      <ul class="footer__nav">
-        <li class="footer__item">
-          <a class="footer__link" href="#">About</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Pricing</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Terms of Use</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Privacy Policy</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Careers</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Blog</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Contact Us</a>
-        </li>
-      </ul>
-      <img src="img/icon.png" alt="Logo" class="footer__logo" />
+      <nav aria-label="Footer navigation">
+        <ul class="footer__nav">
+          <li class="footer__item"><a class="footer__link" href="#section--1">Features</a></li>
+          <li class="footer__item"><a class="footer__link" href="#section--2">Operations</a></li>
+          <li class="footer__item"><a class="footer__link" href="#section--3">Testimonials</a></li>
+          <li class="footer__item"><button class="footer__link btn--show-modal" type="button">Try the account form</button></li>
+          <li class="footer__item"><a class="footer__link" href="#top">Back to top</a></li>
+        </ul>
+      </nav>
+      <img width="106" height="106" src="img/icon.png" alt="Logo" class="footer__logo" />
       <p class="footer__copyright">
-        &copy; Copyright by
+        EcmaBank adaptation by Milad Sadeghi DM. Educational interface demo. Original design by
         <a
           class="footer__link twitter-link"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           href="https://twitter.com/jonasschmedtman"
-          >Milad Sadeghi DM</a
+          >Jonas Schmedtmann</a
         >. Use for learning or your portfolio. Don't use to teach. Don't claim
         as your own product.
       </p>
@@ -326,7 +303,5 @@
       </form>
       <p class="modal__status" role="status" aria-live="polite"></p>
     </dialog>
-
-<!--    <script src="script.js"></script>-->
   </body>
 </html>

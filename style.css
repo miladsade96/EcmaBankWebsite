@@ -867,7 +867,3 @@ h1 {
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .section--hidden { opacity: 1; transform: none; }
 }
-
-.lazy-img {
-  filter: blur(20px);
-}

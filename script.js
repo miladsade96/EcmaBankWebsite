@@ -118,46 +118,22 @@ tabsContainer.addEventListener("keydown", (event) => {
   activateTab(tabs[next], true);
 });
 
-// Reveal section:
-const allSections = document.querySelectorAll(".section");
-const revealSection = function (entries, observer) {
-  const [entry] = entries;
-  if (!entry.isIntersecting) return;
-  entry.target.classList.remove("section--hidden");
-  observer.unobserve(entry.target);
-}
-
-const sectionObserver = new IntersectionObserver(revealSection, {
-  root: null,
-  threshold: 0.15
-});
-allSections.forEach(section => {
-  sectionObserver.observe(section);
-  section.classList.add("section--hidden");
-});
-
-
-// Lazy loading images:
-const imageTargets = document.querySelectorAll("img[data-src]");
-
-const loadImage = function (entries, observer) {
-  const [entry] = entries;
-  if (!entry.isIntersecting) return;
-  entry.target.src = entry.target.dataset.src;
-  entry.target.addEventListener("load", function () {
-    entry.target.classList.remove("lazy-img");
+// Process every observer entry, including sections revealed simultaneously.
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+if ("IntersectionObserver" in window && !reducedMotion.matches) {
+  const sectionObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.remove("section--hidden");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0, rootMargin: "0px 0px -32px 0px" });
+  document.querySelectorAll(".section").forEach((section) => {
+    section.classList.add("section--hidden");
+    sectionObserver.observe(section);
   });
-  observer.unobserve(entry.target);
 }
 
-const imgObserver = new IntersectionObserver(loadImage, {
-  root: null,
-  threshold: 0,
-  rootMargin: "200px"
-});
-imageTargets.forEach(img => imgObserver.observe(img));
-
-////////////////////////////////////////////////////////////////////////////////////
 const slider = document.querySelector(".slider");
 const slides = [...slider.querySelectorAll(".slide")];
 const dotContainer = slider.querySelector(".dots");
@@ -194,24 +170,3 @@ slider.addEventListener("keydown", (event) => {
   }
 });
 goToSlide(0, false);
-
-// DOMContentLoaded:
-
-// No need to do this because script tag is located at the end of the html document.
-document.addEventListener("DOMContentLoaded", function (e) {
-  console.log("HTML parsed and DOM is built!", e);
-});
-
-
-// Load event: html, css and js are loaded:
-window.addEventListener("load", function (e) {
-  console.log("Page fully loaded", e);
-});
-
-
-// Before Unload Event:
-// window.addEventListener("beforeunload", function (e) {
-//   e.preventDefault();
-//   console.log(e);
-//   e.returnValue = "";
-// });
