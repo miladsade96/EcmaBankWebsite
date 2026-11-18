@@ -83,20 +83,40 @@ form.addEventListener("submit", (event) => {
   }
 });
 
-// Tabbed component:
-const tabs = document.querySelectorAll(".operations__tab");
+// Roving tabindex and arrow keys keep tabs usable without a mouse.
 const tabsContainer = document.querySelector(".operations__tab-container");
-const tabsContent = document.querySelectorAll(".operations__content");
-
-tabsContainer.addEventListener("click", e => {
-  const clicked = e.target.closest(".operations__tab");
-  if (!clicked) return;
-  tabs.forEach(t => t.classList.remove("operations__tab--active"));
-  tabsContent.forEach(tc => tc.classList.remove("operations__content--active"));
-  clicked.classList.add("operations__tab--active");
-  document.querySelector(`.operations__content--${clicked.dataset.tab}`)
-    .classList.add("operations__content--active");
-})
+const tabs = [...tabsContainer.querySelectorAll('[role="tab"]')];
+const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+function activateTab(tab, moveFocus = false) {
+  tabs.forEach((item) => {
+    const active = item === tab;
+    item.classList.toggle("operations__tab--active", active);
+    item.setAttribute("aria-selected", String(active));
+    item.tabIndex = active ? 0 : -1;
+  });
+  panels.forEach((panel) => {
+    const active = panel.id === tab.getAttribute("aria-controls");
+    panel.hidden = !active;
+    panel.classList.toggle("operations__content--active", active);
+  });
+  if (moveFocus) tab.focus();
+}
+tabsContainer.addEventListener("click", (event) => {
+  const tab = event.target.closest('[role="tab"]');
+  if (tab) activateTab(tab);
+});
+tabsContainer.addEventListener("keydown", (event) => {
+  const index = tabs.indexOf(event.target);
+  if (index < 0) return;
+  let next;
+  if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+  if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+  if (event.key === "Home") next = 0;
+  if (event.key === "End") next = tabs.length - 1;
+  if (next === undefined) return;
+  event.preventDefault();
+  activateTab(tabs[next], true);
+});
 
 // Reveal section:
 const allSections = document.querySelectorAll(".section");
@@ -138,92 +158,43 @@ const imgObserver = new IntersectionObserver(loadImage, {
 imageTargets.forEach(img => imgObserver.observe(img));
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Slider:
-const slider = function () {
-  const slides = document.querySelectorAll('.slide');
-  const btnLeft = document.querySelector('.slider__btn--left');
-  const btnRight = document.querySelector('.slider__btn--right');
-  const dotContainer = document.querySelector('.dots');
-
-  let curSlide = 0;
-  const maxSlide = slides.length;
-
-  // Functions
-  const createDots = function () {
-    slides.forEach(function (_, i) {
-      dotContainer.insertAdjacentHTML(
-        'beforeend',
-        `<button class="dots__dot" data-slide="${i}"></button>`
-      );
-    });
-  };
-
-  const activateDot = function (slide) {
-    document
-      .querySelectorAll('.dots__dot')
-      .forEach(dot => dot.classList.remove('dots__dot--active'));
-
-    document
-      .querySelector(`.dots__dot[data-slide="${slide}"]`)
-      .classList.add('dots__dot--active');
-  };
-
-  const goToSlide = function (slide) {
-    slides.forEach(
-      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
-    );
-  };
-
-  // Next slide
-  const nextSlide = function () {
-    if (curSlide === maxSlide - 1) {
-      curSlide = 0;
-    } else {
-      curSlide++;
-    }
-
-    goToSlide(curSlide);
-    activateDot(curSlide);
-  };
-
-  const prevSlide = function () {
-    if (curSlide === 0) {
-      curSlide = maxSlide - 1;
-    } else {
-      curSlide--;
-    }
-    goToSlide(curSlide);
-    activateDot(curSlide);
-  };
-
-  const init = function () {
-    goToSlide(0);
-    createDots();
-
-    activateDot(0);
-  };
-  init();
-
-  // Event handlers
-  btnRight.addEventListener('click', nextSlide);
-  btnLeft.addEventListener('click', prevSlide);
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft') prevSlide();
-    e.key === 'ArrowRight' && nextSlide();
+const slider = document.querySelector(".slider");
+const slides = [...slider.querySelectorAll(".slide")];
+const dotContainer = slider.querySelector(".dots");
+const sliderStatus = slider.querySelector(".slider__status");
+let currentSlide = 0;
+const dots = slides.map((_, index) => {
+  const dot = document.createElement("button");
+  dot.type = "button";
+  dot.className = "dots__dot";
+  dot.setAttribute("aria-label", `Show testimonial ${index + 1}`);
+  dot.addEventListener("click", () => goToSlide(index));
+  dotContainer.appendChild(dot);
+  return dot;
+});
+function goToSlide(index, announce = true) {
+  currentSlide = (index + slides.length) % slides.length;
+  slides.forEach((slide, i) => {
+    const active = i === currentSlide;
+    slide.style.transform = `translateX(${100 * (i - currentSlide)}%)`;
+    slide.setAttribute("aria-hidden", String(!active));
+    slide.inert = !active;
+    dots[i].classList.toggle("dots__dot--active", active);
+    if (active) dots[i].setAttribute("aria-current", "true");
+    else dots[i].removeAttribute("aria-current");
   });
+  if (announce) sliderStatus.textContent = `Testimonial ${currentSlide + 1} of ${slides.length}`;
+}
+slider.querySelector(".slider__btn--left").addEventListener("click", () => goToSlide(currentSlide - 1));
+slider.querySelector(".slider__btn--right").addEventListener("click", () => goToSlide(currentSlide + 1));
+slider.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+    event.preventDefault();
+    goToSlide(currentSlide + (event.key === "ArrowRight" ? 1 : -1));
+  }
+});
+goToSlide(0, false);
 
-  dotContainer.addEventListener('click', function (e) {
-    if (e.target.classList.contains('dots__dot')) {
-      const { slide } = e.target.dataset;
-      goToSlide(slide);
-      activateDot(slide);
-    }
-  });
-};
-slider();
-
-////////////////////////////////////////////////////////////////////////////////////
 // DOMContentLoaded:
 
 // No need to do this because script tag is located at the end of the html document.
