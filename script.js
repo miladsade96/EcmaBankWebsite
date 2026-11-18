@@ -36,30 +36,50 @@ mobileLayout.addEventListener("change", () => {
   if (!mobileLayout.matches && focusOnButton) navigation.querySelector("a").focus();
 });
 
-const modal = document.querySelector('.modal');
-const overlay = document.querySelector('.overlay');
-const btnCloseModal = document.querySelector('.btn--close-modal');
-const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+// Native dialogs handle background inertness, Escape and focus containment.
+const modal = document.querySelector(".modal");
+const form = document.querySelector(".modal__form");
+const formStatus = document.querySelector(".modal__status");
+let modalTrigger;
 
-const openModal = function (e) {
-  e.preventDefault();
-  modal.classList.remove('hidden');
-  overlay.classList.remove('hidden');
-};
-
-const closeModal = function () {
-  modal.classList.add('hidden');
-  overlay.classList.add('hidden');
-};
-
-btnsOpenModal.forEach(btn => btn.addEventListener("click", openModal));
-
-btnCloseModal.addEventListener('click', closeModal);
-overlay.addEventListener('click', closeModal);
-
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-    closeModal();
+document.querySelectorAll(".btn--show-modal").forEach((button) => {
+  button.addEventListener("click", () => {
+    closeMenu();
+    modalTrigger = button;
+    modal.showModal();
+    document.body.classList.add("modal-open");
+  });
+});
+document.querySelector(".btn--close-modal").addEventListener("click", () => modal.close());
+modal.addEventListener("click", (event) => {
+  if (event.target !== modal) return;
+  const rect = modal.getBoundingClientRect();
+  if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) modal.close();
+});
+modal.addEventListener("keydown", (event) => {
+  if (event.key !== "Tab") return;
+  const controls = [...modal.querySelectorAll("button, input")].filter((control) => !control.disabled);
+  const first = controls[0];
+  const last = controls[controls.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
+modal.addEventListener("close", () => {
+  document.body.classList.remove("modal-open");
+  form.reset();
+  formStatus.textContent = "";
+  const focusTarget = mobileLayout.matches && navigation.contains(modalTrigger) ? menuButton : modalTrigger;
+  focusTarget?.focus();
+});
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (form.reportValidity()) {
+    formStatus.textContent = "Your details pass validation. This demo does not open an account or send or save your information.";
   }
 });
 
