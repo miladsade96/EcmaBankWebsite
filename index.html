@@ -3,27 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Explore EcmaBank’s minimalist banking interface: digital features, everyday operations and a demo account form." />
     <link rel="shortcut icon" type="image/png" href="img/icon.png" />
 
     <link
       href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
-    <title>EcmaBank | When Banking meets Minimalist</title>
-    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="style.css?v=c39ad09992" />
+    <title>EcmaBank | Banking meets minimalism</title>
+    <script defer src="netlify-form.js?v=b8b47dae52"></script>
+    <script defer src="script.js?v=32347c51b8"></script>
   </head>
-  <body>
-    <header class="header">
-      <nav class="nav">
-        <img
-          src="img/logo.png"
-          alt="Bankist logo"
-          class="nav__logo"
-          id="logo"
-        />
-        <ul class="nav__links">
+  <body id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="nav-shell">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="nav__brand" href="#top" aria-label="EcmaBank home">
+          <img src="img/icon.png" alt="" class="nav__logo" width="40" height="40" />
+          <span>EcmaBank</span>
+        </a>
+        <button class="nav__toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="main-navigation">
+          <svg class="nav__menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+          <svg class="nav__close-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+        </button>
+        <ul class="nav__links" id="main-navigation">
           <li class="nav__item">
             <a class="nav__link" href="#section--1">Features</a>
           </li>
@@ -34,24 +38,24 @@
             <a class="nav__link" href="#section--3">Testimonials</a>
           </li>
           <li class="nav__item">
-            <a class="nav__link nav__link--btn btn--show-modal" href="#"
-              >Open account</a
-            >
+            <button class="nav__link nav__link--btn btn--show-modal" type="button">Open account</button>
           </li>
         </ul>
       </nav>
-
+    </div>
+    <main id="main-content" tabindex="-1">
+    <header class="header">
       <div class="header__title">
         <h1>
           When
           <!-- Green highlight effect -->
           <span class="highlight">banking</span>
           meets<br />
-          <span class="highlight">minimalist</span>
+          <span class="highlight">minimalism</span>
         </h1>
-        <h4>A simpler banking experience for a simpler life.</h4>
-        <button class="btn--text btn--scroll-to">Learn more &DownArrow;</button>
-        <img
+        <p class="header__subtitle">A simpler banking experience for a simpler life.</p>
+        <a class="btn--text" href="#section--1">Learn more</a>
+        <img width="900" height="722"
           src="img/hero.png"
           class="header__img"
           alt="Minimalist bank items"
@@ -61,70 +65,61 @@
 
     <section class="section" id="section--1">
       <div class="section__title">
-        <h2 class="section__description">Features</h2>
-        <h3 class="section__header">
+        <p class="section__description">Features</p>
+        <h2 class="section__header">
           Everything you need in a modern bank and more.
-        </h3>
+        </h2>
       </div>
 
       <div class="features">
-        <img
-          src="img/digital-lazy.jpg"
-          data-src="img/digital.jpg"
+        <img width="2000" height="1200"
+          src="img/digital.jpg" loading="lazy" decoding="async"
           alt="Computer"
-          class="features__img lazy-img"
+          class="features__img"
         />
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-monitor"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-monitor"></use>
             </svg>
           </div>
-          <h5 class="features__header">100% digital bank</h5>
+          <h3 class="features__header">100% digital bank</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde alias
-            sint quos? Accusantium a fugiat porro reiciendis saepe quibusdam
-            debitis ducimus.
+            Keep everyday banking in one place. Review balances, check recent activity and find useful tools through a clear, uncluttered interface.
           </p>
         </div>
 
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-trending-up"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-trending-up"></use>
             </svg>
           </div>
-          <h5 class="features__header">Watch your money grow</h5>
+          <h3 class="features__header">Watch your money grow</h3>
           <p>
-            Nesciunt quos autem dolorum voluptates cum dolores dicta fuga
-            inventore ab? Nulla incidunt eius numquam sequi iste pariatur
-            quibusdam!
+            Follow your savings goals with a clear overview of your progress. A simple layout keeps useful information easy to find.
           </p>
         </div>
-        <img
-          src="img/grow-lazy.jpg"
-          data-src="img/grow.jpg"
+        <img width="2000" height="1200"
+          src="img/grow.jpg" loading="lazy" decoding="async"
           alt="Plant"
-          class="features__img lazy-img"
+          class="features__img"
         />
 
-        <img
-          src="img/card-lazy.jpg"
-          data-src="img/card.jpg"
+        <img width="1999" height="1200"
+          src="img/card.jpg" loading="lazy" decoding="async"
           alt="Credit card"
-          class="features__img lazy-img"
+          class="features__img"
         />
         <div class="features__feature">
           <div class="features__icon">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-credit-card"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-credit-card"></use>
             </svg>
           </div>
-          <h5 class="features__header">Free debit card included</h5>
+          <h3 class="features__header">Free debit card included</h3>
           <p>
-            Quasi, fugit in cumque cupiditate reprehenderit debitis animi enim
-            eveniet consequatur odit quam quos possimus assumenda dicta fuga
-            inventore ab.
+            Keep card controls close at hand. Review purchases and find everyday card tools from the same straightforward interface.
           </p>
         </div>
       </div>
@@ -132,76 +127,67 @@
 
     <section class="section" id="section--2">
       <div class="section__title">
-        <h2 class="section__description">Operations</h2>
-        <h3 class="section__header">
+        <p class="section__description">Operations</p>
+        <h2 class="section__header">
           Everything as simple as possible, but no simpler.
-        </h3>
+        </h2>
       </div>
 
       <div class="operations">
-        <div class="operations__tab-container">
+        <div class="operations__tab-container" role="tablist" aria-label="Banking operations">
           <button
             class="btn operations__tab operations__tab--1 operations__tab--active"
-            data-tab="1"
+            data-tab="1" type="button" role="tab" id="operation-tab-1" aria-controls="operation-panel-1" aria-selected="true" tabindex="0"
           >
             <span>01</span>Instant Transfers
           </button>
-          <button class="btn operations__tab operations__tab--2" data-tab="2">
+          <button class="btn operations__tab operations__tab--2" data-tab="2" type="button" role="tab" id="operation-tab-2" aria-controls="operation-panel-2" aria-selected="false" tabindex="-1">
             <span>02</span>Instant Loans
           </button>
-          <button class="btn operations__tab operations__tab--3" data-tab="3">
+          <button class="btn operations__tab operations__tab--3" data-tab="3" type="button" role="tab" id="operation-tab-3" aria-controls="operation-panel-3" aria-selected="false" tabindex="-1">
             <span>03</span>Instant Closing
           </button>
         </div>
         <div
-          class="operations__content operations__content--1 operations__content--active"
+          class="operations__content operations__content--1 operations__content--active" role="tabpanel" id="operation-panel-1" aria-labelledby="operation-tab-1" tabindex="0"
         >
           <div class="operations__icon operations__icon--1">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-upload"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-upload"></use>
             </svg>
           </div>
-          <h5 class="operations__header">
-            Tranfser money to anyone, instantly! No fees, no BS.
-          </h5>
+          <h3 class="operations__header">
+            Transfer money to anyone, instantly! A simpler way to send.
+          </h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            Choose a recipient, enter an amount and review the details before confirming. Clear steps help keep everyday transfers straightforward.
           </p>
         </div>
 
-        <div class="operations__content operations__content--2">
+        <div class="operations__content operations__content--2" role="tabpanel" id="operation-panel-2" aria-labelledby="operation-tab-2" tabindex="0" hidden>
           <div class="operations__icon operations__icon--2">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-home"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-home"></use>
             </svg>
           </div>
-          <h5 class="operations__header">
+          <h3 class="operations__header">
             Buy a home or make your dreams come true, with instant loans.
-          </h5>
+          </h3>
           <p>
-            Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
+            Get a clear view of the information needed for a borrowing request, from its purpose and amount to the next steps in the process.
           </p>
         </div>
-        <div class="operations__content operations__content--3">
+        <div class="operations__content operations__content--3" role="tabpanel" id="operation-panel-3" aria-labelledby="operation-tab-3" tabindex="0" hidden>
           <div class="operations__icon operations__icon--3">
-            <svg>
-              <use xlink:href="img/icons.svg#icon-user-x"></use>
+            <svg aria-hidden="true" focusable="false">
+              <use href="img/icons.svg#icon-user-x"></use>
             </svg>
           </div>
-          <h5 class="operations__header">
+          <h3 class="operations__header">
             No longer need your account? No problem! Close it instantly.
-          </h5>
+          </h3>
           <p>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat.
+            Find account settings and review the steps for closing an account in one place. Important choices stay clear and easy to locate.
           </p>
         </div>
       </div>
@@ -209,143 +195,119 @@
 
     <section class="section" id="section--3">
       <div class="section__title section__title--testimonials">
-        <h2 class="section__description">Not sure yet?</h2>
-        <h3 class="section__header">
-          Millions of Bankists are already making their lifes simpler.
-        </h3>
+        <p class="section__description">Illustrative customer stories</p>
+        <h2 class="section__header">
+          A simpler experience, in our customers’ words.
+        </h2>
       </div>
 
-      <div class="slider">
-        <div class="slide slide--1">
+      <div class="slider" role="region" aria-roledescription="carousel" aria-label="Customer testimonials" tabindex="0">
+        <div class="slide slide--1" role="group" aria-roledescription="slide" aria-label="1 of 3">
           <div class="testimonial">
-            <h5 class="testimonial__header">Best financial decision ever!</h5>
+            <h3 class="testimonial__header">Best financial decision ever!</h3>
             <blockquote class="testimonial__text">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Accusantium quas quisquam non? Quas voluptate nulla minima
-              deleniti optio ullam nesciunt, numquam corporis et asperiores
-              laboriosam sunt, praesentium suscipit blanditiis. Necessitatibus
-              id alias reiciendis, perferendis facere pariatur dolore veniam
-              autem esse non voluptatem saepe provident nihil molestiae.
+              I want the important things in one place: a clear balance, recent activity and a straightforward way to send money. This layout shows what a calmer everyday banking experience could look like.
             </blockquote>
             <address class="testimonial__author">
-              <img src="img/user-1.jpg" alt="" class="testimonial__photo" />
-              <h6 class="testimonial__name">Aarav Lynn</h6>
+              <img width="128" height="128" src="img/user-1.jpg" alt="" class="testimonial__photo" />
+              <p class="testimonial__name">Aarav Lynn</p>
               <p class="testimonial__location">San Francisco, USA</p>
             </address>
           </div>
         </div>
 
-        <div class="slide slide--2">
+        <div class="slide slide--2" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true" inert>
           <div class="testimonial">
-            <h5 class="testimonial__header">
+            <h3 class="testimonial__header">
               The last step to becoming a complete minimalist
-            </h5>
+            </h3>
             <blockquote class="testimonial__text">
-              Quisquam itaque deserunt ullam, quia ea repellendus provident,
-              ducimus neque ipsam modi voluptatibus doloremque, corrupti
-              laborum. Incidunt numquam perferendis veritatis neque repellendus.
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo
-              deserunt exercitationem deleniti.
+              A banking interface should help me find what I need quickly. Clear sections and familiar controls make the experience feel simple, even on a small screen.
             </blockquote>
             <address class="testimonial__author">
-              <img src="img/user-2.jpg" alt="" class="testimonial__photo" />
-              <h6 class="testimonial__name">Miyah Miles</h6>
+              <img width="128" height="128" src="img/user-2.jpg" alt="" class="testimonial__photo" />
+              <p class="testimonial__name">Miyah Miles</p>
               <p class="testimonial__location">London, UK</p>
             </address>
           </div>
         </div>
 
-        <div class="slide slide--3">
+        <div class="slide slide--3" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true" inert>
           <div class="testimonial">
-            <h5 class="testimonial__header">
+            <h3 class="testimonial__header">
               Finally free from old-school banks
-            </h5>
+            </h3>
             <blockquote class="testimonial__text">
-              Debitis, nihil sit minus suscipit magni aperiam vel tenetur
-              incidunt commodi architecto numquam omnis nulla autem,
-              necessitatibus blanditiis modi similique quidem. Odio aliquam
-              culpa dicta beatae quod maiores ipsa minus consequatur error sunt,
-              deleniti saepe aliquid quos inventore sequi. Necessitatibus id
-              alias reiciendis, perferendis facere.
+              I appreciate seeing useful information without unnecessary clutter. This preview brings the basics together in a clean, readable experience.
             </blockquote>
             <address class="testimonial__author">
-              <img src="img/user-3.jpg" alt="" class="testimonial__photo" />
-              <h6 class="testimonial__name">Francisco Gomes</h6>
+              <img width="128" height="128" src="img/user-3.jpg" alt="" class="testimonial__photo" />
+              <p class="testimonial__name">Francisco Gomes</p>
               <p class="testimonial__location">Lisbon, Portugal</p>
             </address>
           </div>
         </div>
-        <button class="slider__btn slider__btn--left">&larr;</button>
-        <button class="slider__btn slider__btn--right">&rarr;</button>
-        <div class="dots"></div>
+        <button class="slider__btn slider__btn--left" type="button" aria-label="Previous testimonial">&lsaquo;</button>
+        <button class="slider__btn slider__btn--right" type="button" aria-label="Next testimonial">&rsaquo;</button>
+        <div class="dots" role="group" aria-label="Choose a testimonial"></div>
+        <p class="sr-only slider__status" role="status" aria-live="polite"></p>
       </div>
     </section>
 
-    <section class="section section--sign-up">
+    <section class="section section--sign-up" id="sign-up">
       <div class="section__title">
-        <h3 class="section__header">
-          The best day to join Bankist was one year ago. The second best is
+        <h2 class="section__header">
+          The best day to join EcmaBank was one year ago. The second best is
           today!
-        </h3>
+        </h2>
       </div>
-      <button class="btn btn--show-modal">Open your free account today!</button>
+      <button class="btn btn--show-modal" type="button">Open your free account today!</button>
     </section>
+
+    </main>
 
     <footer class="footer">
-      <ul class="footer__nav">
-        <li class="footer__item">
-          <a class="footer__link" href="#">About</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Pricing</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Terms of Use</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Privacy Policy</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Careers</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Blog</a>
-        </li>
-        <li class="footer__item">
-          <a class="footer__link" href="#">Contact Us</a>
-        </li>
-      </ul>
-      <img src="img/icon.png" alt="Logo" class="footer__logo" />
+      <nav aria-label="Footer navigation">
+        <ul class="footer__nav">
+          <li class="footer__item"><a class="footer__link" href="#section--1">Features</a></li>
+          <li class="footer__item"><a class="footer__link" href="#section--2">Operations</a></li>
+          <li class="footer__item"><a class="footer__link" href="#section--3">Testimonials</a></li>
+          <li class="footer__item"><button class="footer__link btn--show-modal" type="button">Request account information</button></li>
+          <li class="footer__item"><a class="footer__link" href="#top">Back to top</a></li>
+        </ul>
+      </nav>
+      <img width="106" height="106" src="img/icon.png" alt="Logo" class="footer__logo" />
       <p class="footer__copyright">
-        &copy; Copyright by
+        EcmaBank adaptation by Milad Sadeghi DM. Educational interface demo. Original design by
         <a
           class="footer__link twitter-link"
-          target="_blank"
+          target="_blank" rel="noopener noreferrer"
           href="https://twitter.com/jonasschmedtman"
-          >Milad Sadeghi DM</a
+          >Jonas Schmedtmann</a
         >. Use for learning or your portfolio. Don't use to teach. Don't claim
         as your own product.
       </p>
     </footer>
 
-    <div class="modal hidden">
-      <button class="btn--close-modal">&times;</button>
-      <h2 class="modal__header">
-        Open your bank account <br />
-        in just <span class="highlight">5 minutes</span>
-      </h2>
-      <form class="modal__form">
-        <label>First Name</label>
-        <input type="text" />
-        <label>Last Name</label>
-        <input type="text" />
-        <label>Email Address</label>
-        <input type="email" />
-        <button class="btn">Next step &rarr;</button>
+    <dialog class="modal" aria-labelledby="account-title" aria-describedby="account-description">
+      <button class="btn--close-modal" type="button" aria-label="Close account form">&times;</button>
+      <h2 class="modal__header" id="account-title">Get <span class="highlight">EcmaBank</span> account information</h2>
+      <p class="modal__description" id="account-description">Send your name and email so we can follow up. This request does not open a bank account.</p>
+      <form class="modal__form" name="account-request" method="POST" action="/"
+            data-netlify="true" netlify-honeypot="bot-field" aria-describedby="account-description account-status">
+        <input type="hidden" name="form-name" value="account-request" />
+        <p hidden>
+          <label>Leave this field empty: <input name="bot-field" type="text" autocomplete="off" tabindex="-1" /></label>
+        </p>
+        <label for="first-name">First name</label>
+        <input id="first-name" name="first-name" type="text" autocomplete="given-name" pattern=".*\S.*" title="Enter your first name." required autofocus />
+        <label for="last-name">Last name</label>
+        <input id="last-name" name="last-name" type="text" autocomplete="family-name" pattern=".*\S.*" title="Enter your last name." required />
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
+        <button class="btn" type="submit">Send request</button>
       </form>
-    </div>
-    <div class="overlay hidden"></div>
-
-<!--    <script src="script.js"></script>-->
+      <p class="modal__status" id="account-status" role="status" aria-live="polite"></p>
+    </dialog>
   </body>
 </html>
