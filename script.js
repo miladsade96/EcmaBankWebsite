@@ -40,6 +40,9 @@ mobileLayout.addEventListener("change", () => {
 const modal = document.querySelector(".modal");
 const form = document.querySelector(".modal__form");
 const formStatus = document.querySelector(".modal__status");
+const accountForm = initNetlifyForm(form, formStatus, {
+  successMessage: "Thanks! Your account information request has been sent.",
+});
 let modalTrigger;
 
 document.querySelectorAll(".btn--show-modal").forEach((button) => {
@@ -58,7 +61,7 @@ modal.addEventListener("click", (event) => {
 });
 modal.addEventListener("keydown", (event) => {
   if (event.key !== "Tab") return;
-  const controls = [...modal.querySelectorAll("button, input")].filter((control) => !control.disabled);
+  const controls = [...modal.querySelectorAll("button, input")].filter((control) => !control.disabled && control.type !== "hidden" && !control.closest("[hidden]"));
   const first = controls[0];
   const last = controls[controls.length - 1];
   if (event.shiftKey && document.activeElement === first) {
@@ -71,18 +74,13 @@ modal.addEventListener("keydown", (event) => {
 });
 modal.addEventListener("close", () => {
   document.body.classList.remove("modal-open");
-  form.reset();
-  formStatus.textContent = "";
+  if (form.getAttribute("aria-busy") !== "true") {
+    form.reset();
+    accountForm.resetFeedback();
+  }
   const focusTarget = mobileLayout.matches && navigation.contains(modalTrigger) ? menuButton : modalTrigger;
   focusTarget?.focus();
 });
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (form.reportValidity()) {
-    formStatus.textContent = "Your details pass validation. This demo does not open an account or send or save your information.";
-  }
-});
-
 // Roving tabindex and arrow keys keep tabs usable without a mouse.
 const tabsContainer = document.querySelector(".operations__tab-container");
 const tabs = [...tabsContainer.querySelectorAll('[role="tab"]')];

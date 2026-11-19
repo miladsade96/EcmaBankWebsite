@@ -10,9 +10,10 @@
       href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css?v=d530e21383" />
+    <link rel="stylesheet" href="style.css?v=c39ad09992" />
     <title>EcmaBank | Banking meets minimalism</title>
-    <script defer src="script.js?v=d34f0f8451"></script>
+    <script defer src="netlify-form.js?v=b8b47dae52"></script>
+    <script defer src="script.js?v=32347c51b8"></script>
   </head>
   <body id="top">
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -271,7 +272,7 @@
           <li class="footer__item"><a class="footer__link" href="#section--1">Features</a></li>
           <li class="footer__item"><a class="footer__link" href="#section--2">Operations</a></li>
           <li class="footer__item"><a class="footer__link" href="#section--3">Testimonials</a></li>
-          <li class="footer__item"><button class="footer__link btn--show-modal" type="button">Try the account form</button></li>
+          <li class="footer__item"><button class="footer__link btn--show-modal" type="button">Request account information</button></li>
           <li class="footer__item"><a class="footer__link" href="#top">Back to top</a></li>
         </ul>
       </nav>
@@ -290,18 +291,23 @@
 
     <dialog class="modal" aria-labelledby="account-title" aria-describedby="account-description">
       <button class="btn--close-modal" type="button" aria-label="Close account form">&times;</button>
-      <h2 class="modal__header" id="account-title">Preview your <span class="highlight">EcmaBank</span> account</h2>
-      <p class="modal__description" id="account-description">Try the sign-up form. This demo does not open a bank account or send or save your details.</p>
-      <form class="modal__form" method="dialog">
+      <h2 class="modal__header" id="account-title">Get <span class="highlight">EcmaBank</span> account information</h2>
+      <p class="modal__description" id="account-description">Send your name and email so we can follow up. This request does not open a bank account.</p>
+      <form class="modal__form" name="account-request" method="POST" action="/"
+            data-netlify="true" netlify-honeypot="bot-field" aria-describedby="account-description account-status">
+        <input type="hidden" name="form-name" value="account-request" />
+        <p hidden>
+          <label>Leave this field empty: <input name="bot-field" type="text" autocomplete="off" tabindex="-1" /></label>
+        </p>
         <label for="first-name">First name</label>
         <input id="first-name" name="first-name" type="text" autocomplete="given-name" pattern=".*\S.*" title="Enter your first name." required autofocus />
         <label for="last-name">Last name</label>
         <input id="last-name" name="last-name" type="text" autocomplete="family-name" pattern=".*\S.*" title="Enter your last name." required />
         <label for="email">Email address</label>
         <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
-        <button class="btn" type="submit">Check my details</button>
+        <button class="btn" type="submit">Send request</button>
       </form>
-      <p class="modal__status" role="status" aria-live="polite"></p>
+      <p class="modal__status" id="account-status" role="status" aria-live="polite"></p>
     </dialog>
   </body>
 </html>
